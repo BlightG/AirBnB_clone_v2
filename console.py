@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
         _cmd = _cls = _id = _args = ''  # initialize line elements
 
         # scan for general formating - i.e '.', '(', ')'
-        if not ('.' in line and '(' in line and ')' in line ):
+        if not ('.' in line and '(' in line and ')' in line):
             return line
 
         try:  # parse line left to right
@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[arglist[0]]()
-	# modifies the aruments to be <class> <id> <attr name> <att value>
+        # modifies the aruments to be <class> <id> <attr name> <att value>
         if len(arglist) >= 2:
             for i in range(1, len(arglist)):
                 attname = arglist[i].split('=')
@@ -131,10 +131,9 @@ class HBNBCommand(cmd.Cmd):
                     attname[1] = attname[1].replace('_', ' ')
                 if '"' in attname[1]:
                     attname[1] = attname[1].replace('"', '\"')
-                updatearg = arglist[0] + ' ' + new_instance.id + ' ' + attname[0] + ' ' +  attname[1]
-                print(attname)
-                self.do_update(updatearg) 
-            
+                updatearg = arglist[0] + ' ' + new_instance.id +\
+                    ' ' + attname[0] + ' ' + attname[1]
+                self.do_update(updatearg)
         storage.save()
         print(new_instance.id)
         storage.save()
@@ -332,6 +331,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
