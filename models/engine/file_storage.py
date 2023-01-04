@@ -10,7 +10,7 @@ class FileStorage:
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        new_obj = {}
+        new_obj = {}  # new dict to return object of same type
         if cls is None:
             return FileStorage.__objects
         for key, value in FileStorage.__objects.items():
@@ -32,7 +32,7 @@ class FileStorage:
             json.dump(temp, f)
 
     def delete(self, obj=None):
-        """ deletes a filestorage object if it is present in __objects """
+        """deletes a filestorage object if it is present in __objects"""
         key = obj.to_dict()['__class__'] + '.' + obj.id
         if key in FileStorage.__objects.keys():
             FileStorage.__objects.pop(key)
