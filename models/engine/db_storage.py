@@ -21,7 +21,7 @@ class DBstorage:
     HBNB_MYSQL_HOST = os.getenv('HBNB_MYSQL_HOST')
     HBNB_MYSQL_DB = os.getenv('HBNB_MYSQL_DB')
     HBNB_ENV = os.getenv('HBNB_ENV')
-    classes = [City, State]
+    classes = [City, State, User]
 
     def __init__(self):
         """Instanciates a new DBstorage"""
@@ -40,7 +40,6 @@ class DBstorage:
         # searches for all values of an instance of an obj or all objects
         if cls is not None:
             if cls in DBstorage.classes:
-
                 query = self.__session.query(cls).all()
                 # print(f'query = {query}')
         else:
