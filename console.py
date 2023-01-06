@@ -129,6 +129,7 @@ class HBNBCommand(cmd.Cmd):
         args_dict = {}
         args_dict = self.parse_to_kwarg(arglist)
         if len(args_dict) >= 1:
+            print(args_dict)
             new_instance = HBNBCommand.classes[arglist[0]](**args_dict)
         else:
             new_instance = HBNBCommand.classes[arglist[0]]()
