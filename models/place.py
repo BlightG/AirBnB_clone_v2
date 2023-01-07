@@ -28,7 +28,7 @@ class Place(BaseModel, Base):
             Column("place_id", String(60), ForeignKey(
                 'places.id'), nullable=False),
             Column("amenity_id", String(60), ForeignKey(
-                'ameniteis.id'), nullable=False)
+                'amenities.id'), nullable=False)
         )
         amenities = relationship("Amenity", secondary=place_amenity)
 
