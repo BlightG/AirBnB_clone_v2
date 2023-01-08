@@ -16,8 +16,8 @@ if not isfunction(delete_fct):
 
 fs = FileStorage()
 try:
-	fs.delete()
-	print("OK", end="")
+    fs.delete()
+    print("OK", end="")
 except:
-	print("`delete` is not a public instance method allowing no parameter")
-	exit(1)
+    print("`delete` is not a public instance method allowing no parameter")
+    exit(1)
