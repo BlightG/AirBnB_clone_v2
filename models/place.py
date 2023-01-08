@@ -7,6 +7,15 @@ from sqlalchemy import Table, Column, String, ForeignKey, INTEGER, FLOAT
 from sqlalchemy.orm import relationship
 
 
+place_amenity = Table(
+    'place_amenity', Base.metadata,
+    Column("place_id", String(60), ForeignKey(
+        'places.id'),  nullable=False),
+    Column("amenity_id", String(60), ForeignKey(
+        'amenities.id'),  nullable=False)
+)
+
+
 class Place(BaseModel, Base):
     """ A place to stay """
     HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
@@ -22,15 +31,9 @@ class Place(BaseModel, Base):
         price_by_night = Column(INTEGER, default=0, nullable=False)
         latitude = Column(FLOAT, default=0, nullable=False)
         longitude = Column(FLOAT, default=0, nullable=False)
-        reviews = relationship("Place", cascade="delete", backref="user")
-        place_amenity = Table(
-            'place_amenity', Base.metadata,
-            Column("place_id", String(60), ForeignKey(
-                'places.id'), nullable=False),
-            Column("amenity_id", String(60), ForeignKey(
-                'amenities.id'), nullable=False)
-        )
-        amenities = relationship("Amenity", secondary=place_amenity)
+        reviews = relationship("Review", cascade="delete", backref="places")
+        amenities = relationship(
+            "Amenity", secondary=place_amenity, viewonly=False)
 
     else:
         city_id = ""
@@ -47,7 +50,7 @@ class Place(BaseModel, Base):
         store = FileStorage()
 
         @property
-        def Place(self):
+        def cities(self):
             """Getter attribute for cities class"""
             place_list = []
             for key, value in Place.store.all().items():
@@ -55,3 +58,13 @@ class Place(BaseModel, Base):
                     if value.place_id == self.id:
                         place_list.append(value)
             return place_list
+
+        @property
+        def reviews(self):
+            """Getter attribute for cities class"""
+            review_list = []
+            for key, value in Place.store.all().items():
+                if value['__class__'] == 'Review':
+                    if value.id == self.id:
+                        review_list.append(value)
+            return review_list

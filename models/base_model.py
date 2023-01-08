@@ -62,8 +62,6 @@ class BaseModel:
         """Updates updated_at with current time when instance is changed"""
         from models import storage
         self.updated_at = datetime.now()
-        if getattr(self, '_sa_instance_state', None) is not None:
-            delattr(self, '_sa_instance_state')
         storage.save()
 
     def to_dict(self):

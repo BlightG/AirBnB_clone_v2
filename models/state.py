@@ -16,7 +16,7 @@ class State(BaseModel, Base):
         from sqlalchemy import Column, String
         from sqlalchemy.orm import relationship
         name = Column(String(128), nullable=False)
-        cities = relationship("City", cascade="delete", backref="state")
+        cities = relationship("City", cascade="delete", backref="State")
     else:
         name = ""
         store = FileStorage()

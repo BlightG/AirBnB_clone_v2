@@ -15,17 +15,6 @@ class Review(BaseModel, Base):
         place_id = Column(String(60), ForeignKey('places.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         text = Column(String(1024), nullable=False)
-        store = FileStorage()
-
-        @property
-        def reviews(self):
-            """Getter attribute for cities class"""
-            review_list = []
-            for key, value in Review.store.all().items():
-                if value['__class__'] == 'City':
-                    if value.place_id == self.id:
-                        review_list.append(value)
-            return review_list
 
     else:
         place_id = ""
