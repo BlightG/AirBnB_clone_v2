@@ -30,28 +30,28 @@ class BaseModel:
             storage.new(self)
         else:
             from models import storage
-            try:
-                isinstance(kwargs['id'], str)
-            except KeyError:
-                self.id = str(uuid.uuid4())
-            try:
-                kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                         '%Y-%m-%dT%H:%M:%S.%f')
-            except KeyError:
-                kwargs['updated_at'] = datetime.now()
+        # try:
+            isinstance(kwargs['id'], str)
+            """
+            self.id = str(uuid.uuid4())
+        try:"""
+            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
+            """except KeyError:
+            kwargs['updated_at'] = datetime.now()
 
-            try:
-                kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                         '%Y-%m-%dT%H:%M:%S.%f')
-            except KeyError:
-                kwargs['created_at'] = datetime.now()
+        try:"""
+            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
+            """except KeyError:
+            kwargs['created_at'] = datetime.now()
 
-            try:
-                del kwargs['__class__']
-            except KeyError:
-                pass
-            self.__dict__.update(kwargs)
-            storage.new(self)
+        try:"""
+            del kwargs['__class__']
+        """except KeyError:
+            pass"""
+        self.__dict__.update(kwargs)
+        storage.new(self)
 
     def __str__(self):
         """Returns a string representation of the instance"""
