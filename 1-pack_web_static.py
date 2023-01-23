@@ -3,6 +3,7 @@
 from fabric.api import local
 import os
 
+
 def do_pack():
     '''a function to compress files'''
     if not os.path.isdir('versions'):
