@@ -127,11 +127,14 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args_dict = {}
-        args_dict = self.parse_to_kwarg(arglist)
-        if len(args_dict) >= 1:
+        new_instance = HBNBCommand.classes[arglist[0]]()
+        if len(arglist) >= 2:
+            #    new_instance = HBNBCommand.classes[arglist[0]]()
+            #    storage.save()
+            args_dict = self.parse_to_kwarg(arglist, new_instance.to_dict())
             new_instance = HBNBCommand.classes[arglist[0]](**args_dict)
-        else:
-            new_instance = HBNBCommand.classes[arglist[0]]()
+        """else:
+            new_instance = HBNBCommand.classes[arglist[0]]()"""
         new_instance.save()
         print(new_instance.id)
         storage.save()
@@ -141,17 +144,22 @@ class HBNBCommand(cmd.Cmd):
         print("Creates a class of any type")
         print("[Usage]: create <className>\n")
 
-    def parse_to_kwarg(self, arglist):
+    def parse_to_kwarg(self, arglist, dict):
         """Changes a list of strings to a dict of key value pairs"""
         new_dict = {}
+        print(arglist)
+        # print(f'new_dict id = {new_dict}, dict id ={dict}')
         for i in range(1, len(arglist)):
             attname = arglist[i].split('=')
+            print(attname)
             if '_' in attname[1]:
                 attname[1] = attname[1].replace('_', ' ')
             if '"' in attname[1]:
                 attname[1] = attname[1].replace('"', '')
             new_dict[attname[0]] = attname[1]
-            # print(new_dict)
+
+        new_dict.update(dict)
+        print(new_dict)
         return new_dict
 
     def do_show(self, args):

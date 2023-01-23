@@ -52,6 +52,7 @@ class BaseModel:
             pass"""
         self.__dict__.update(kwargs)
         storage.new(self)
+        print(f'new_instance = {self} ')
 
     def __str__(self):
         """Returns a string representation of the instance"""
