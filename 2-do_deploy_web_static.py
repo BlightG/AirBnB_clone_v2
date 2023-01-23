@@ -18,12 +18,12 @@ def do_deploy(archive_path):
 #        return False
 
     if os.path.exists(archive_path) is False:
-        print(archive_path)
         return False
 
     if put(archive_path, '/tmp').failed is True:
         return False
 
+    run('mkdir -p /data/web_static/releses/{}'.format(archive_path.split('/')[0]))
     run('tar -xvf /tmp/{} --directory /data/web_static/releases/'.format(
         archive_path.split('/')[1]))
     run('rm /tmp/{}'.format(archive_path.split('/')[1]))
