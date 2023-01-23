@@ -10,7 +10,7 @@ def do_pack():
     if not os.path.isdir('versions'):
         if local('mkdir -p versions').failed is True:
             return None
-
+    dt = datetime.utcnow()
     file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
                                                          dt.month,
                                                          dt.day,
