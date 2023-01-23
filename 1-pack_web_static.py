@@ -10,3 +10,4 @@ def do_pack():
         local('mkdir versions')
     local('tar -cavf "web_static_$(date +"%Y%m%d%h%m%s").tar.gz" web_static')
     local('mv web_static_* versions')
+    return ('versions')
