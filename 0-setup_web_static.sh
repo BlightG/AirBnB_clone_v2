@@ -22,5 +22,6 @@ then
 fi
 ln -s /data/web_static/releases/test/ /data/web_static/current
 new_location=" \tlocation /hbnb_static{\n\t\talias /data/web_static/current\n}"
+sudo chown -R ubuntu:ubuntu /data
 sudo sed -i "37i\\$new_location" /etc/nginx/sites-enabled/default
 sudo service nginx restart
