@@ -1,5 +1,9 @@
 # task 0 using ppupet
 
+package { 'nginx':
+  ensure => 'present',
+}
+
 file { ['/data',
         '/data/web_static',
         '/data/web_static/releases',
@@ -26,9 +30,16 @@ exec { 'ln -s':
   require => Exec['test -L'],
 }
 
+exec { 'chown':
+  path    => 'usr/bin/env bash',
+  command => 'sudo chown -R ubuntu:ubuntu /data',
+  require => Exec['ln -s'],
+}
+
 exec { 'sed -i':
   path    => 'usr/bin/env bash',
   command => 'sudo sed -i "36i\\\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t} /etc/nginx/sites-enabled/default',
+  require => Package['nginx'],
   notify  => Exec['nginx'],
 }
 
