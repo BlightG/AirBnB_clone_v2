@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# cleans the archive files on remote servers using Fabric
+'''  cleans the archive files on remote servers using Fabric '''
 import os
 from fabric.api import env
 from fabric.api import run
