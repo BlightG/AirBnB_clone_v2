@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 # combines the task 1 and task 2
 import os.path
 from datetime import datetime
