@@ -34,6 +34,6 @@ def do_clean(number=0):
         #     local('rm versions/{}.tgz'.format(web_files[0]))
         # else:
         for i in range(clean_count):
-            print('/data/web_static/releases/{}'.format(web_files[i]))
+            # print('/data/web_static/releases/{}'.format(web_files[i]))
             run('rm -r /data/web_static/releases/{}'.format(web_files[i]))
             local('rm versions/{}.tgz'.format(web_files[i]))
