@@ -26,6 +26,8 @@ def do_clean(number=0):
     if count > number + 1:
         if number == 0:
             run('rm /data/web_static/releases/{}'.format(web_files[0]))
+            local('rm versions/{}.tgz'.format(web_files[0])
         else:
             for i in range(number - 1):
                 run('rm /data/web_static/releases/{}'.format(web_files[i]))
+                local('rm versions/{}.tgz'.format(web_files[i])
