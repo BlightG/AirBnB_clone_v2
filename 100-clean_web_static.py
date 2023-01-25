@@ -4,7 +4,7 @@ import os
 from fabric.api import env
 from fabric.api import run
 
-env.hostsi = ['100.26.20.157', '54.144.137.83']
+env.hosts = ['100.26.20.157', '54.144.137.83']
 
 
 def do_clean(number=0):
@@ -23,12 +23,12 @@ def do_clean(number=0):
         return None
 
     web_files.sort()
-    clean_count = count - number 
-    if clean_count > 0 and count > number:
+    clean_count = count - int(number)
+    if clean_count > 0 and count > int(number) + 1:
 #        if number == 0:
 #            run('rm /data/web_static/releases/{}'.format(web_files[0]))
 #            local('rm versions/{}.tgz'.format(web_files[0]))
 #        else:
         for i in range(clean_count):
-            run('rm /data/web_static/releases/{}'.format(web_files[i]))
+            run('rm -r /data/web_static/releases/{}'.format(web_files[i]))
             local('rm versions/{}.tgz'.format(web_files[i]))
