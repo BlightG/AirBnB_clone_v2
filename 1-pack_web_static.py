@@ -11,12 +11,8 @@ def do_pack():
         if local('mkdir -p versions').failed is True:
             return None
     dt = datetime.utcnow()
-    file = "versions/web_static_{}{}{}{}{}{}.tgz".format(dt.year,
-                                                         dt.month,
-                                                         dt.day,
-                                                         dt.hour,
-                                                         dt.minute,
-                                                         dt.second)
+    file = "versions/web_static_{:04d}{:02d}{:02d}{:02d}{:02d}{:02d}.tgz"\
+           .format(dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
     if local('tar -cavf {} web_static'.format(file)).failed is True:
         return None
 
