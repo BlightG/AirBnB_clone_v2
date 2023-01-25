@@ -14,9 +14,9 @@ def do_clean(number=0):
     local_entiries = os.listdir('versions')  # returns list
     files = entiries.split()
     local_files = []  # list of local files starting with web_static
-    for i in range(len(local_entiries)):
-        if local_entiries[i].startswith('web_static') is True:
-            local_files.append(local_entiries[i])
+    for i in local_entiries:
+        if i.startswith('web_static') is True:
+            local_files.append(i)
 
     web_files = []  # list of files stating with web_static
     for i in files:
@@ -34,17 +34,13 @@ def do_clean(number=0):
     if int(number) < 0:
         return None
     clean_count = len(web_files) - int(number)
+    local_count = len(local_files) - int(number)
     # print('clean_count = {}'.format(clean_count))
-    if clean_count > 1: 
-        # if number == 0:
-        #     run('rm /data/web_static/releases/{}'.format(web_files[0]))
-        #     local('rm versions/{}.tgz'.format(web_files[0]))
-        # else:
+    if clean_count > 0 and clean_count <= len(web_files):
         for i in range(clean_count):
-            # print('/data/web_static/releases/{}'.format(web_files[i]))
+            print('/data/web_static/releases/{}'.format(web_files[i]))
             run('rm -r /data/web_static/releases/{}'.format(web_files[i]))
 
-    local_count = len(local_files) - int(number)
-    if local_count > 1: 
+    if local_count > 0 and local_count <= len(local_files):
         for i in range(local_count):
             local('rm versions/{}'.format(local_files[i]))
