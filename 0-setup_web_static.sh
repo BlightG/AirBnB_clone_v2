@@ -17,7 +17,7 @@ echo "<html>
 " | sudo tee /data/web_static/releases/test/index.html
 test -L /data/web_static/current && sudo rm /data/web_static/current
 
-ln -s /data/web_static/releases/test/ /data/web_static/current
+sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 new_location=" \tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}"
 sudo chown -R ubuntu:ubuntu /data
 sudo sed -i "36i\\$new_location" /etc/nginx/sites-enabled/default
