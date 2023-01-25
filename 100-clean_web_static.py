@@ -35,7 +35,7 @@ def do_clean(number=0):
         return None
     clean_count = len(web_files) - int(number)
     # print('clean_count = {}'.format(clean_count))
-    if clean_count > 0 and len(web_files) > int(number) + 1:
+    if clean_count > 1: 
         # if number == 0:
         #     run('rm /data/web_static/releases/{}'.format(web_files[0]))
         #     local('rm versions/{}.tgz'.format(web_files[0]))
@@ -45,6 +45,6 @@ def do_clean(number=0):
             run('rm -r /data/web_static/releases/{}'.format(web_files[i]))
 
     local_count = len(local_files) - int(number)
-    if local_count > 0 and len(local_files) > int(number) + 1:
+    if local_count > 1: 
         for i in range(local_count):
             local('rm versions/{}'.format(local_files[i]))
