@@ -12,7 +12,7 @@ def do_clean(number=0):
     count = 0  # used to count files statring with web_static
     entiries = run('ls /data/web_static/releases')
     files = entiries.split()
-    web_files = [] #  list of files stating with web_static
+    web_files = []  # list of files stating with web_static
 
     for i in files:
         if i.startswith('web_static') is True:
@@ -26,8 +26,8 @@ def do_clean(number=0):
     if count > number + 1:
         if number == 0:
             run('rm /data/web_static/releases/{}'.format(web_files[0]))
-            local('rm versions/{}.tgz'.format(web_files[0])
+            local('rm versions/{}.tgz'.format(web_files[0]))
         else:
             for i in range(number - 1):
                 run('rm /data/web_static/releases/{}'.format(web_files[i]))
-                local('rm versions/{}.tgz'.format(web_files[i])
+                local('rm versions/{}.tgz'.format(web_files[i]))
