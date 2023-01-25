@@ -4,7 +4,7 @@ from fabric.api import run
 from fabric.api import put
 from fabric.api import env
 import os
-env.hosts = ['54.144.137.83', '100.25.165.152']
+env.hosts = ["100.26.20.157", "54.144.137.83"]
 env.user = 'ubuntu'
 
 
@@ -33,7 +33,7 @@ def do_deploy(archive_path):
            file, name)).failed is True:
         return False
 
-    if run('rm /tmp/{}/'.format(file)).failed is True:
+    if run('rm /tmp/{}'.format(file)).failed is True:
         return False
 
     if run('mv /data/web_static/releases/{}/web_static/* '
