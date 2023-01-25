@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''  cleans the archive files on remote servers using Fabric '''
+'''cleans the archive files on remote servers using Fabric'''
 import os
 from fabric.api import env
 from fabric.api import run
@@ -12,7 +12,7 @@ def do_clean(number=0):
     count = 0  # used to count files statring with web_static
     entiries = run('ls /data/web_static/releases')
     files = entiries.split()
-    web_files = [] i  # list of files stating with web_static
+    web_files = [] #  list of files stating with web_static
 
     for i in files:
         if i.startswith('web_static') is True:
