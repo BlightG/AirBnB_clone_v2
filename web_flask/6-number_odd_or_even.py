@@ -2,8 +2,11 @@
 ''' a script that starts a flask web application '''
 from flask import Flask
 from flask import render_template
+import jinja2
 
 hbnb = Flask(__name__)
+hbnb.jinja_env.lstrip_blocks = True
+hbnb.jinja_env.trim_blocks = True
 
 
 @hbnb.route('/', strict_slashes=False)
@@ -45,6 +48,14 @@ def number_template(n):
     ''' checks if url has int or not '''
     if isinstance(n, int):
         return render_template('5-number.html', n=n)
+
+
+@hbnb.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def number_odd_or_even(n):
+    ''' checks if url has int or not
+        detremines if it is odd or even '''
+    if isinstance(n, int):
+        return render_template('6-number_odd_or_even.html', n=n)
 
 
 if __name__ == '__main__':
