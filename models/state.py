@@ -21,12 +21,14 @@ class State(BaseModel, Base):
         name = ""
         store = FileStorage()
 
-        @property
-        def cities(self):
-            """Getter attribute for cities class"""
-            city_list = []
-            for key, value in State.store.all().items():
-                if value['__class__'] == 'City':
-                    if value.state_id == self.id:
-                        city_list.append(value)
-            return city_list
+    @property
+    def cities(self):
+        """Getter attribute for cities class"""
+        city_list = []
+        for key, value in State.store.all().items():
+            # print(f'State.store.all() = {State.store.all()}')
+            # print(f'value.__dict__ = {value.__dict__}')
+            if value.to_dict()['__class__'] == 'City':
+                if value.state_id == self.id:
+                    city_list.append(value)
+        return city_list
