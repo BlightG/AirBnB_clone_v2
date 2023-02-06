@@ -13,7 +13,7 @@ app.jinja_env.trim_blocks = True
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     ''' returns list of cities '''
-    state_list = storage.all()
+    state_list = storage.all('State')
     # print(f'state_list = {state_list.items()}')
     return render_template('7-states_list.html', state_list=state_list)
 

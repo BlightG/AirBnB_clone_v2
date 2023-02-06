@@ -49,8 +49,11 @@ class DBstorage:
 
         # appends the query into with key <cls-name>.<object-id>
         cls_dict = {}
-        for obj in query:
-            cls_dict[f'{obj.__class__.__name__}.{obj.id}'] = obj
+        try:
+            for obj in query:
+                cls_dict[f'{obj.__class__.__name__}.{obj.id}'] = obj
+        except UnboundLocalError:
+            pass
         # print(cls_dict)
         return cls_dict
 
