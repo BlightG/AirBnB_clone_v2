@@ -14,5 +14,9 @@ app.jinja_env.trim_blocks = True
 def states_list():
     ''' returns list of cities '''
     state_list = storage.all()
-    print(f'state_list = {state_list}')
-    return render_template('7-states_list.html', state_list)
+    # print(f'state_list = {state_list.items()}')
+    return render_template('7-states_list.html', state_list=state_list)
+
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000)
