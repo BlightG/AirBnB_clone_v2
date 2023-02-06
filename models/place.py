@@ -23,8 +23,8 @@ class Place(BaseModel, Base):
     if HBNB_TYPE_STORAGE == 'db':
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-        name = Column(String(128), nullable=False)
-        description = Column(String(1024), nullable=True)
+        name = Column(String(128), nullable=False, server_default="NUL")
+        description = Column(String(1024), nullable=True, server_default="NUL")
         number_rooms = Column(INTEGER, default=0, nullable=False)
         number_bathrooms = Column(INTEGER, default=0, nullable=False)
         max_guest = Column(INTEGER, default=0, nullable=False)

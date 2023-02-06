@@ -15,7 +15,7 @@ class State(BaseModel, Base):
     if HBNB_TYPE_STORAGE == 'db':
         from sqlalchemy import Column, String
         from sqlalchemy.orm import relationship
-        name = Column(String(128), nullable=False)
+        name = Column(String(128), nullable=False, server_default="NUL")
         cities = relationship("City", cascade="delete", backref="State")
     else:
         name = ""

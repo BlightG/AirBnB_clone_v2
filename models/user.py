@@ -11,10 +11,10 @@ class User(BaseModel, Base):
     HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
     __tablename__ = 'users'
     if HBNB_TYPE_STORAGE == 'db':
-        email = Column(String(128), nullable=False)
-        password = Column(String(128), nullable=False)
-        first_name = Column(String(128), nullable=False)
-        last_name = Column(String(128), nullable=False)
+        email = Column(String(128), nullable=False, server_default="NUL")
+        password = Column(String(128), nullable=False, server_default="NUL") 
+        first_name = Column(String(128), nullable=False, server_default="NUL" )
+        last_name = Column(String(128), nullable=False, server_default="NUL" )
         places = relationship("Place", cascade="delete", backref="user")
         reviews = relationship("Review", cascade="delete", backref="user")
     else:
