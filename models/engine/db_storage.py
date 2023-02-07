@@ -2,7 +2,7 @@
 """This module defines a class to manage file storage for hbnb clone"""
 import os
 from sqlalchemy import (create_engine)
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import BaseModel, Base
 from models.amenity import Amenity
 from models.city import City
@@ -38,24 +38,18 @@ class DBstorage:
         """Instance that querys a database session"""
 
         # searches for all values of an instance of an obj or all objects
-        if cls is not None:
-            if cls in DBstorage.classes:
-                query = self.__session.query(cls).all()
-                # print(f'query = {query}')
+        if cls is None:
+            objs = self.__session.query(State).all()
+            objs.extend(self.__session.query(City).all())
+            objs.extend(self.__session.query(User).all())
+            objs.extend(self.__session.query(Place).all())
+            objs.extend(self.__session.query(Review).all())
+            objs.extend(self.__session.query(Amenity).all())
         else:
-            for cls in DBstorage.classes:
-                query = self.__session.query(cls).all()
-                # print(f'query1 = {query}')
-
-        # appends the query into with key <cls-name>.<object-id>
-        cls_dict = {}
-        try:
-            for obj in query:
-                cls_dict[f'{obj.__class__.__name__}.{obj.id}'] = obj
-        except UnboundLocalError:
-            pass
-        # print(cls_dict)
-        return cls_dict
+            if type(cls) == str:
+                cls = eval(cls)
+            objs = self.__session.query(cls)
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}        
 
     def new(self, obj):
         """creates a new instance of obj"""
@@ -74,9 +68,11 @@ class DBstorage:
 
     def reload(self):
         """reloads all objs"""
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        self.__session = Session()
         Base.metadata.create_all(self.__engine)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
+        Session = scoped_session(session_factory)
+        self.__session = Session()
 
     def close(self):
         """ call remove() method on the private
