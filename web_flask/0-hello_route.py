@@ -2,13 +2,13 @@
 ''' a script that starts a flask web application '''
 from flask import Flask
 
-hbnb = Flask(__name__)
+app = Flask(__name__)
 
 
-@hbnb.route('/', strict_slashes=False)
+@app.route('/airbnb-onepage', strict_slashes=False)
 def home():
     return "Hello HBNB!"
 
 
 if __name__ == '__main__':
-    hbnb.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
